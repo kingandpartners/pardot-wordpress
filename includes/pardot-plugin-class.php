@@ -839,12 +839,15 @@ class Pardot_Plugin {
 				}
 			}
 		}
-        $body_html = apply_filters('pardot_form_embed_code_' . $args['form_id'], $body_html);
 
         /**
-         * Apply additional filter to apply to forms globally
+         * If specific form filter set, use that filter otherwise use global filter
          */
-        return apply_filters('pardot_form_embed_code', $body_html);
+        if (has_filter('pardot_form_embed_code_' . $args['form_id'])) {
+            return apply_filters('pardot_form_embed_code_' . $args['form_id'], $body_html);
+        } else {
+            return apply_filters('pardot_form_embed_code', $body_html);
+        }
 	}
 
 	/**
