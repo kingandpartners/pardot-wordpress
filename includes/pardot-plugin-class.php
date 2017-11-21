@@ -839,7 +839,12 @@ class Pardot_Plugin {
 				}
 			}
 		}
-		return apply_filters('pardot_form_embed_code_' . $args['form_id'], $body_html);
+        $body_html = apply_filters('pardot_form_embed_code_' . $args['form_id'], $body_html);
+
+        /**
+         * Apply additional filter to apply to forms globally
+         */
+        return apply_filters('pardot_form_embed_code', $body_html);
 	}
 
 	/**
